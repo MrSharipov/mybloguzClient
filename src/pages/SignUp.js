@@ -8,7 +8,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
+    
+    //Authorization
     const handleLogin = async (e) => {
         e.preventDefault();
         await axios.post("http://localhost:3003/auth/signup", {name, email, password})

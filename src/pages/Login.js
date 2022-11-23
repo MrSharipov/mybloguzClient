@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Form, Row, Col, FormGroup, Label, Input, Button } from 'reactstrap';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
 
+    //Authorization
     const handleLogin = async (e) => {
         e.preventDefault();
         await axios.post("http://localhost:3003/auth/signin", {email, password})
         .then(response => {
             localStorage.setItem("access_token", response.data.access_token);
-            navigate('/');
+            window.location.replace('/');
         })
         .catch((err)=> {
             if(err.response.status === 403){
