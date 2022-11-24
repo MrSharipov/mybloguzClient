@@ -108,7 +108,7 @@ const UpdatePost = (props) => {
             <Row>
             <Col md={4}>
                 <Button color='primary' type='submit'>
-                Create
+                Update
                 </Button>  
             </Col>
             </Row>
