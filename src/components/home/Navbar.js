@@ -11,6 +11,11 @@ const Navbar = (props) => {
       const jwtExpTime = decodedJwt.exp * 1000;
       isLogged = (!!localStorage.getItem("access_token") && jwtExpTime - currentTime > 0);
     }
+
+    const logOut = () => {
+      localStorage.clear();
+      window.location.replace('/');
+    }
     
 
   return (
@@ -22,7 +27,7 @@ const Navbar = (props) => {
                 <li><Link to="/">Home</Link></li>
                 {isLogged ? <>
                 <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><Link to="/logout">Logout</Link></li></> : 
+                <li onClick={logOut} className='text-primary' role="button">Logout</li></> : 
                 <li><Link to="/login">Login</Link></li>}
             </div>
            

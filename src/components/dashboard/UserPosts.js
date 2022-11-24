@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import {BiEdit} from 'react-icons/bi';
 import {RiDeleteBin5Line} from 'react-icons/ri';
 import { Card, CardBody, CardText, CardTitle, CardLink } from 'reactstrap';
@@ -6,6 +7,27 @@ import { Card, CardBody, CardText, CardTitle, CardLink } from 'reactstrap';
 import axios from 'axios';
 
 const MyAllPosts = () => {
+  const navigate = useNavigate();
+  const handleDelete = async (id) => {
+    
+      //Authorization
+      let config = {
+        headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+        }
+      }
+
+      await axios.delete(`http://localhost:3003/posts/${id}`, config) 
+      .then(response => {
+          alert("Post successfully deleted!!!")
+          navigate('/');
+      })
+      .catch((err)=> {
+          alert(err.response.data.message)
+      });
+  }
+
+
   const [posts, setPosts] = useState([]);
   const listHTML = posts.map((post, index)=> <Card key={index} className="mb-3">
         <CardBody>
@@ -22,11 +44,11 @@ const MyAllPosts = () => {
             <CardText>
             {post.description}
             </CardText>
+            <Link to={`/updatepost/${post.id}`} >
+            <BiEdit size={"25px"}  />
+            </Link>
             <CardLink href="#">
-            <BiEdit size={"25px"} />
-            </CardLink>
-            <CardLink href="#">
-            <RiDeleteBin5Line size={"25px"} />
+            <RiDeleteBin5Line size={"25px"} onClick={()=>{handleDelete(post.id)}} />
             </CardLink>
         </CardBody>
     </Card>);

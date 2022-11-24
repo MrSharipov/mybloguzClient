@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import ShowUserPosts from "./components/dashboard/ShowUserPosts";
 import EditProfile from "./components/dashboard/EditProfile";
 import LogOut from "./pages/LogOut";
+import CreatePost from "./components/dashboard/CreatePost";
+import UpdatePost from "./components/dashboard/UpdatePost";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
                   <Route path="dashboard" element={<Dashboard /> } />
                   <Route path="/myposts" element={<ShowUserPosts /> } />
                   <Route path="/editprofile" element={<EditProfile /> } />
+                  <Route path="/createpost" element={<CreatePost /> } />
+                  <Route path="/updatepost/:id" element={<UpdatePost /> } />
               </Routes>
           </Navbar>
       </BrowserRouter>

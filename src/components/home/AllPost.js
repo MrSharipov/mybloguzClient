@@ -18,7 +18,7 @@ const AllPost = () => {
           handleLogin();
       },[]);
 
-    const listHTML = posts.map((post, index)=> <Post key={index} title={post.title} link={post.link} description={post.description} />);
+    const listHTML = posts.reverse().map((post, index)=> <Post key={index} id={post.id} title={post.title} link={post.link} description={post.description} time={post.createdAt} />);
 
   return (
     <div className='makeTwoColumn'>

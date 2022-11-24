@@ -1,10 +1,9 @@
 import React from 'react';
-import {BiEdit} from 'react-icons/bi';
-import {RiDeleteBin5Line} from 'react-icons/ri';
-import { Card, CardBody, CardText, CardTitle, CardLink } from 'reactstrap';
+import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
 
 
 const Post = (props) => {
+
   return (
     <Card className="mb-3" style={{
         width: '500px'
@@ -23,12 +22,11 @@ const Post = (props) => {
             <CardText>
             {props.description}
             </CardText>
-            <CardLink href="#">
-            <BiEdit size={"25px"} />
-            </CardLink>
-            <CardLink href="#">
-            <RiDeleteBin5Line size={"25px"} />
-            </CardLink>
+            <CardText>
+        <small className="text-muted">
+          Created at {props.time.slice(0,10)}
+        </small>
+      </CardText>
         </CardBody>
     </Card>
   )

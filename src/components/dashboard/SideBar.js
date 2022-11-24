@@ -6,12 +6,17 @@ const SideBar = (props) => {
   return (
     <div className='inMiddle'>
         <Card style={{
-            width: '18rem'
+            width: '18rem',
         }}>
-            <Nav vertical>
+            <Nav vertical className='flexMarginBottom'>
                 <NavItem>
                 <Link to="/myposts">
                     My posts
+                </Link>
+                </NavItem>
+                <NavItem>
+                <Link to="/createpost">
+                    Create post
                 </Link>
                 </NavItem>
                 <NavItem>
