@@ -24,7 +24,6 @@ const CreatePost = () => {
         })
         .catch((err)=> {
             alert(err.response.data.message);
-            navigate('/login');
         });
     }
 
