@@ -4,10 +4,11 @@ import jwt_decode from 'jwt-decode';
 import { Container } from 'reactstrap';
 
 const Navbar = (props) => {
+    let decodedJwt; 
     const currentTime = new Date().getTime();
     let isLogged = false;
     if(!!localStorage.getItem("access_token")){
-      const decodedJwt = jwt_decode(localStorage.getItem("access_token"));
+      decodedJwt = jwt_decode(localStorage.getItem("access_token"));
       const jwtExpTime = decodedJwt.exp * 1000;
       isLogged = (!!localStorage.getItem("access_token") && jwtExpTime - currentTime > 0);
     }
@@ -23,6 +24,7 @@ const Navbar = (props) => {
       <nav>
         <ul>
             <li><h1><Link to="/">My Blog</Link></h1></li>
+            {isLogged ? <li>{decodedJwt.name}, welcome to MyBlog.UZ</li> : ""}
             <div className='menu'>
                 <li><Link to="/">Home</Link></li>
                 {isLogged ? <>

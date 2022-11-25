@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import SideBar from './SideBar';
 import { Form, Row, Col, FormGroup, Label, Input, Button, Container } from 'reactstrap';
 
@@ -9,9 +10,41 @@ const EditProfile = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleEdit = async () => {
-        navigate("/dashboard");
+    //Authorization
+    let config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+        }
     }
+
+    //Get single post
+    useEffect(()=>{
+        axios.get("http://localhost:3003/users/", config)
+            .then((res) => {
+                const { name, email } = res.data;
+                setName(name);
+                setEmail(email);
+            })
+            .catch((err) => {
+                alert(err.response.data.message);
+                console.log(err)
+                navigate("/login")
+            });
+    // eslint-disable-next-line
+    },[]);
+
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        await axios.put("http://localhost:3003/users", {name, email, password}, config) 
+        .then(response => {
+            alert("User successfully updated!!! To see changes login again");
+            window.location.replace("/dashboard");
+        })
+        .catch((err)=> {
+            alert(err.response.data.message)
+        });
+    }
+
   return (
     <Container>
         <Row>
@@ -61,12 +94,12 @@ const EditProfile = () => {
                         <Col md={6}>
                         <FormGroup>
                             <Label for="Password">
-                            Password
+                            New password
                             </Label>
                             <Input
                             id="Password"
                             name="password"
-                            placeholder="password"
+                            placeholder="new password"
                             type="password"
                             value={password}
                             onChange={(e)=>{setPassword(e.target.value)}}
