@@ -17,7 +17,7 @@ const CreatePost = () => {
     }
     const handleCreate = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:3003/posts", {title, link, description}, config) 
+        await axios.post(process.env.REACT_APP_REMOTE_BACKEND + "/posts" || "http://localhost:3003/posts", {title, link, description}, config) 
         .then(response => {
             alert("Post successfully created!!!")
             navigate('/');

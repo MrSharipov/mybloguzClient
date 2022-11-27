@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const LogOut = () => {
     const LogOut = async (e) => {
-        await axios.post("http://localhost:3003/logout")
+        await axios.post(process.env.REACT_APP_REMOTE_BACKEND + "/logout" || "http://localhost:3003/logout")
         .then(response => {
             alert("Successfully logged out");
             window.location.replace('/');

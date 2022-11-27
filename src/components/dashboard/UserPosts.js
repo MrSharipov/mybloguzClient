@@ -17,7 +17,7 @@ const MyAllPosts = () => {
         }
       }
 
-      await axios.delete(`http://localhost:3003/posts/${id}`, config) 
+      await axios.delete(process.env.REACT_APP_REMOTE_BACKEND + `/posts/${id}` || `http://localhost:3003/posts/${id}`, config) 
       .then(response => {
           alert("Post successfully deleted!!!")
           navigate('/');
@@ -64,7 +64,7 @@ const MyAllPosts = () => {
       }
     }
     const handleLogin = async () => {
-      await axios.get("http://localhost:3003/posts", config)
+      await axios.get(process.env.REACT_APP_REMOTE_BACKEND + "/posts" || "http://localhost:3003/posts", config)
       .then(response => {
         setPosts(response.data);
       })

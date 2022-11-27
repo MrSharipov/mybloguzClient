@@ -10,7 +10,7 @@ const Login = () => {
     //Authorization
     const handleLogin = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:3003/auth/signin", {email, password})
+        await axios.post(process.env.REACT_APP_REMOTE_BACKEND + "/auth/signin" || "http://localhost:3003/auth/signin", {email, password})
         .then(response => {
             localStorage.setItem("access_token", response.data.access_token);
             window.location.replace('/');

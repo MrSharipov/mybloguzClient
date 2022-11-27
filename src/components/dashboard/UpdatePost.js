@@ -20,7 +20,7 @@ const UpdatePost = (props) => {
 
     //Get single post
     useEffect(()=>{
-        axios.get("http://localhost:3003/posts/" + id, config)
+        axios.get(process.env.REACT_APP_REMOTE_BACKEND + "/posts" || "http://localhost:3003/posts/" + id, config)
             .then((res) => {
                 const { title, link, description } = res.data;
                 setTitle(title);
@@ -39,7 +39,7 @@ const UpdatePost = (props) => {
     //Update post
     const handleUpdate = async (e) => {
         e.preventDefault();
-        await axios.put("http://localhost:3003/posts/" + id, {title, link, description}, config) 
+        await axios.put(process.env.REACT_APP_REMOTE_BACKEND + "/posts" || "http://localhost:3003/posts/" + id, {title, link, description}, config) 
         .then(response => {
             alert("Post successfully updated!!!")
             navigate('/');

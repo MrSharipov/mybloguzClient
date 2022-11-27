@@ -6,7 +6,7 @@ const AllPost = () => {
   const [posts, setPosts] = useState([]);
     useEffect(()=>{
         const handleLogin = async () => {
-          await axios.get("http://localhost:3003/posts/all")
+          await axios.get(process.env.REACT_APP_REMOTE_BACKEND + "/posts/all" || "http://localhost:3003/posts/all")
           .then(response => {
             setPosts(response.data);
           })

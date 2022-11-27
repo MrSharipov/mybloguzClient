@@ -19,7 +19,7 @@ const EditProfile = () => {
 
     //Get single post
     useEffect(()=>{
-        axios.get("http://localhost:3003/users/", config)
+        axios.get(process.env.REACT_APP_REMOTE_BACKEND + "/users" || "http://localhost:3003/users/", config)
             .then((res) => {
                 const { name, email } = res.data;
                 setName(name);
@@ -35,7 +35,7 @@ const EditProfile = () => {
 
     const handleEdit = async (e) => {
         e.preventDefault();
-        await axios.put("http://localhost:3003/users", {name, email, password}, config) 
+        await axios.put(process.env.REACT_APP_REMOTE_BACKEND + "/users" || "http://localhost:3003/users", {name, email, password}, config) 
         .then(response => {
             alert("User successfully updated!!! To see changes login again");
             window.location.replace("/dashboard");

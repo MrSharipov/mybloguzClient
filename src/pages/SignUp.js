@@ -12,7 +12,7 @@ const Login = () => {
     //Authorization
     const handleLogin = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:3003/auth/signup", {name, email, password})
+        await axios.post(process.env.REACT_APP_REMOTE_BACKEND + "/auth/signup" || "http://localhost:3003/auth/signup", {name, email, password})
         .then(response => {
             alert("Successfully registered!!!")
             navigate('/login');
