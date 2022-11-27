@@ -39,7 +39,7 @@ const UpdatePost = (props) => {
     //Update post
     const handleUpdate = async (e) => {
         e.preventDefault();
-        await axios.put(process.env.REACT_APP_REMOTE_BACKEND + "/posts" || "http://localhost:3003/posts/" + id, {title, link, description}, config) 
+        await axios.put(process.env.REACT_APP_REMOTE_BACKEND + "/posts/" + id || "http://localhost:3003/posts/" + id, {title, link, description}, config) 
         .then(response => {
             alert("Post successfully updated!!!")
             navigate('/');
