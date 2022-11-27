@@ -20,7 +20,7 @@ const UpdatePost = (props) => {
 
     //Get single post
     useEffect(()=>{
-        axios.get(process.env.REACT_APP_REMOTE_BACKEND + "/posts" || "http://localhost:3003/posts/" + id, config)
+        axios.get(process.env.REACT_APP_REMOTE_BACKEND + "/posts/" + id || "http://localhost:3003/posts/" + id, config)
             .then((res) => {
                 const { title, link, description } = res.data;
                 setTitle(title);
